@@ -13,7 +13,7 @@ public class UsuarioServiceMock implements IUsuarioService {
         // Simulamos el login de tu captura de pantalla
         if (username.equals("alumno33") && password.equals("1234")) {
             // Devolvemos un usuario de prueba. "AP" por la esquina de la captura :)
-            return new Usuario(1, "alumno33", "Ariel Pérez");
+            return new Usuario(1, "Ariel", "Perez", "alumno33", "1234", "Estudiante");
         }
 
         // Si el login falla

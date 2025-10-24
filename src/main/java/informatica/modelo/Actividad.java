@@ -1,23 +1,29 @@
 // paquete: informatica.modelo
 package informatica.modelo;
 
-public class Actividad {
+// Clase abstracta para definir la estructura común de las actividades.
+public abstract class Actividad {
     private int idActividad;
-    private String nombre;
-    private String tipo; // "seccion", "actividad", "video", "recurso"
-    private boolean completado;
+    private String titulo;
+    private String descripcion;
 
     // Constructor
-    public Actividad(int idActividad, String nombre, String tipo, boolean completado) {
+    public Actividad(int idActividad, String titulo, String descripcion) {
         this.idActividad = idActividad;
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.completado = completado;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
     }
 
-    // Getters
+    // Getters y Setters (Encapsulamiento)
     public int getIdActividad() { return idActividad; }
-    public String getNombre() { return nombre; }
-    public String getTipo() { return tipo; }
-    public boolean isCompletado() { return completado; }
+    public String getTitulo() { return titulo; }
+    public String getDescripcion() { return descripcion; }
+
+    // Método abstracto para Polimorfismo: Cada tipo de actividad mostrará su contenido de forma diferente.
+    public abstract String obtenerDetalleContenido();
+
+    // Método común para todas las actividades
+    public String getResumen() {
+        return "Actividad: " + titulo + " (ID: " + idActividad + ")";
+    }
 }

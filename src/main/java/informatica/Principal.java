@@ -1,8 +1,11 @@
 package informatica;
-
+import informatica.modelo.Actividad;
+import informatica.modelo.Curso;
+import informatica.dao.CursoDAO;
 import informatica.dao.UsuarioDAO;
 import informatica.modelo.Usuario;
 import java.util.Scanner;
+import java.util.List;
 
 public class Principal {
 
@@ -78,6 +81,29 @@ public class Principal {
         for (Usuario u : usuarioDAO.obtenerTodos()) {
             System.out.printf("ID: %d | Nombre: %s %s | Rol: %s%n",
                     u.getId(), u.getNombre(), u.getApellido(), u.getRol());
+        }
+    }
+    private static void mostrarCursos(CursoDAO cursoDAO) {
+        System.out.println("\n--- LISTA DE CURSOS (ORDENADOS) ---");
+        List<Curso> cursos = cursoDAO.obtenerTodosOrdenadosPorNombre(); // Uso de algoritmo de ordenación
+
+        for (Curso curso : cursos) {
+            System.out.println("------------------------------------");
+            System.out.println("CURSO: " + curso.getNombre() + " (ID: " + curso.getIdCurso() + ")");
+            System.out.println("ACTIVIDADES:");
+
+            // Bucle para demostrar el Polimorfismo
+            for (Actividad actividad : curso.getActividades()) {
+                // Se llama al método común, pero el resultado es distinto según el tipo de objeto (Video o Documento)
+                System.out.println("  - " + actividad.getResumen());
+                System.out.println("    [DETALLE POLIMÓRFICO]: " + actividad.obtenerDetalleContenido());
+            }
+
+            // Uso de Algoritmo de Búsqueda
+            Actividad buscada = curso.buscarActividadPorTitulo("Manual de Seguridad");
+            if (buscada != null) {
+                System.out.println("\n[BUSCADA]: Encontrada: " + buscada.getTitulo());
+            }
         }
     }
 }
